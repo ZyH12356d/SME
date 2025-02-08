@@ -1,50 +1,57 @@
 package com.sme.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.sql.Timestamp;
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@Table(name = "branch")
 public class Branch {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(nullable = false, length = 45)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 45)
     private String branchCode;
 
-    @Column(nullable = false)
-    private int phoneNumber;
+    @Column(nullable = false, length = 45)
+    private String phoneNumber;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 45)
     private String email;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private String city;
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date updatedDate;
 
     @Column(nullable = false)
-    private String state;
+    private Integer status;
 
-    @Column(nullable = false)
-    private String address;
 
-    @Column(nullable = false)
-    private Timestamp createdDate;
+    public Status getStatus() {
+        return Status.fromCode(this.status);
+    }
 
-    @Column(nullable = false)
-    private Timestamp updatedDate;
+    public void setStatus(Status status) {
+        this.status = status.getCode();
+    }
 
-    @Column(nullable = false)
-    private int status = 1;
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
 
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<User> users;
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Holiday> holidays;
+
 }

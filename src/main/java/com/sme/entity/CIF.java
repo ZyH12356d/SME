@@ -1,59 +1,71 @@
 package com.sme.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@Table(name = "cif")
 public class CIF {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name",nullable = false, length = 60)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "nrc_number",nullable = false, length = 45)
     private String nrcNumber;
 
-    @Column(nullable = false)
-    private LocalDate dob; // Using LocalDate instead of Date
+    @Column(name = "dob", nullable = false)
+    private LocalDate dob;
 
-    @Column(nullable = false)
+    @Column(name = "gender", nullable = false, length = 45)
     private String gender;
 
-    @Column(nullable = false)
+    @Column(name = "phone_number", nullable = false, length = 45)
     private String phoneNumber;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, length = 45)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "address", nullable = false, length = 45)
     private String address;
 
-    @Column(nullable = false)
-    private String materialStatus;
+    @Column(name = "martial_status", nullable = false, length = 45)
+    private String maritalStatus;
 
-    @Column(nullable = false)
+    @Column(name = "occupation", nullable = false, length = 45)
     private String occupation;
 
-    @Column(nullable = false)
-    private Double incomeAmount;
+    @Column(name = "income_source", nullable = false, length = 45)
+    private String incomeSource;
 
-    @Column(nullable = false)
-    private Timestamp createdDate;
 
-    @Column(nullable = false)
-    private String nrcFrontUrl;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private String nrcBackUrl;
+    @Column(name = "f_nrc_photo", nullable = false, length = 255)
+    private String F_nrcPhoto;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Current_account acc; // Assuming the naming follows camelCase for consistency
+    @Column(name = "b_nrc_photo", nullable = false, length = 255)
+    private String B_nrcPhoto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
+
+    @OneToOne(mappedBy = "cif", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CurrentAccount currentAccount;
+
+
+    @OneToMany(mappedBy = "cif", cascade = CascadeType.ALL)
+    private List<Collateral> collaterals;
+
 }
