@@ -3,7 +3,9 @@ package com.sme.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -24,10 +26,10 @@ public class HpSchedule {
     private int principalAmount;
 
     @Column(name = "late_day")
-    private String lateDay;
+    private int lateDay;
 
     @Column(name = "late_fee")
-    private String lateFee;
+    private BigDecimal lateFee;
 
     @Column(name = "principal_od")
     private String principalOd;
@@ -42,6 +44,6 @@ public class HpSchedule {
     private int hpRegistrationId;
 
     @Column(name = "late_fee_paid_date")
-    private Date lateFeePaidDate;
+    private LocalDateTime lateFeePaidDate;
 
  }

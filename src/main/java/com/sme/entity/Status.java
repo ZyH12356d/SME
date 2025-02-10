@@ -1,7 +1,6 @@
 package com.sme.entity;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 
@@ -19,10 +18,6 @@ public enum Status {
         this.code = code;
     }
 
-
-    public int getCode() {
-        return code;
-    }
 
     public static Status fromCode(int code) {
       for (Status status: Status.values()) {

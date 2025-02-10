@@ -3,7 +3,10 @@ package com.sme.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -17,13 +20,13 @@ public class HpRegistration {
     private String hpNumber;
 
     @Column(name = "created_date", nullable = false)
-    private Timestamp createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "loan_amount")
-    private double loanAmount;
+    private BigDecimal loanAmount;
 
     @Column(name = "down_payment")
-    private double downPayment;
+    private BigDecimal downPayment;
 
     @Column(name = "loan_term")
     private Integer loanTerm;
@@ -32,10 +35,10 @@ public class HpRegistration {
     private String interestRate;
 
     @Column(name = "start_date")
-    private String startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private Timestamp endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "status")
     private Integer status;
@@ -56,6 +59,6 @@ public class HpRegistration {
     private int currentAccountId;
 
     @Column(name = "disbusement_date")
-    private java.sql.Date disbursementDate;
+    private LocalDateTime disbursementDate;
 
 }

@@ -3,6 +3,8 @@ package com.sme.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @Table(name = "hp_product")
@@ -27,7 +29,7 @@ public class HpProduct {
     }
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @Column(name = "product_type_id", nullable = false)
     private int productTypeId;
@@ -39,6 +41,6 @@ public class HpProduct {
     private int hpRegistrationId;
 
     @Column(name = "comission_fee")
-    private String commissionFee;
+    private BigDecimal commissionFee;
 
 }

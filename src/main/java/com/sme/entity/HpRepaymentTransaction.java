@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "hp_repayment_transaction", schema = "mydb")
+@Table(name = "hp_repayment_transaction")
 public class HpRepaymentTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
